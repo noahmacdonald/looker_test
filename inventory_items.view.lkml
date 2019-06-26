@@ -50,4 +50,10 @@ view: inventory_items {
     type: count
     drill_fields: [id, products.id, products.item_name, order_items.count]
   }
+
+  measure: warehouse_value {
+    type: sum
+    sql: ${cost} ;;
+    value_format_name: usd
+  }
 }

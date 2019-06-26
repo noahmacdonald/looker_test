@@ -46,4 +46,21 @@ view: products {
     type: count
     drill_fields: [id, item_name, inventory_items.count]
   }
+
+  dimension: ordered {
+    type: yesno
+    sql: ${order_items.id} = ${id} ;;
+  }
+
+  measure: avg_product {
+    type: average
+    sql: ${retail_price} ;;
+    value_format_name: usd
+  }
+
+  measure: item_warehouse_value {
+    type: number
+    value_format_name: usd
+    sql: ${retail_price}*${count} ;;
+  }
 }

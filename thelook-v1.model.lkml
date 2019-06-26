@@ -28,6 +28,13 @@ explore: inventory_items {
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
+
+  join: order_items {
+    type: left_outer
+    sql_on: ${inventory_items.product_id} = ${order_items.inventory_item_id} ;;
+    relationship: many_to_one
+  }
+
 }
 
 explore: order_items {
@@ -64,7 +71,13 @@ explore: orders {
   }
 }
 
-explore: products {}
+explore: products {
+  join: order_items {
+    type: left_outer
+    sql_on: ${order_items.id} = ${products.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: schema_migrations {}
 
